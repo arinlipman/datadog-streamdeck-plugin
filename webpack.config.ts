@@ -55,6 +55,10 @@ const config = (environment: unknown, options: { mode: string; env: unknown }): 
           },
         },
         {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
           test: /\.js$/,
           enforce: 'pre',
           use: [

@@ -1,13 +1,15 @@
 {
-  "name": "@rweich/streamdeck-ts-template",
+  "name": "@arinlipman/datadog-streamdeck-plugin",
   "version": "0.0.0-development",
-  "description": "a template to create streamdeck plugins in typescript",
+  "description": "A DataDog StreamDeck plugin",
   "private": true,
-  "author": "rweich",
+  "author": "arinlipman",
   "license": "MIT",
   "scripts": {
-    "build": "yarn clean && webpack --mode=development",
+    "build": "yarn clean && webpack --mode=development && yarn copy-dist",
     "build-prod": "yarn clean && webpack --mode=production",
+    "restart": "killall 'Stream Deck' && open -a 'Elgato Stream Deck'",
+    "copy-dist": "cp -R ./dist/dev.info.arinlipman.datadog.sdPlugin/* ~/Library/Application\\ Support/com.elgato.StreamDeck/Plugins/dev.info.arinlipman.datadog.sdPlugin",
     "ci": "yarn type-check && yarn lint && yarn set-plugin-version 0.0.0",
     "clean": "rimraf ./dist/*",
     "lint": "eslint 'src/**/*.ts'",
@@ -18,7 +20,10 @@
     "watch": "webpack watch --mode=development"
   },
   "dependencies": {
-    "@rweich/streamdeck-ts": "^4.0.0"
+    "@datadog/datadog-api-client": "^1.22.0",
+    "@rweich/streamdeck-formbuilder": "^2.1.3",
+    "@rweich/streamdeck-ts": "^4.0.0",
+    "ts-type-guards": "^0.7.0"
   },
   "devDependencies": {
     "@amille/semantic-release-plugins": "^3.3.10",
@@ -39,6 +44,8 @@
     "babel-loader": "^8.2.2",
     "conventional-changelog-conventionalcommits": "^4.6.0",
     "copy-webpack-plugin": "^10.2.4",
+    "copyfiles": "^2.4.1",
+    "css-loader": "^6.10.0",
     "fork-ts-checker-webpack-plugin": "^7.0.0",
     "husky": "^7.0.4",
     "jsonfile": "^6.1.0",
@@ -46,6 +53,7 @@
     "rimraf": "^3.0.2",
     "semantic-release": "^19.0.3",
     "source-map-loader": "^3.0.0",
+    "style-loader": "^3.3.4",
     "ts-node": "^10.0.0",
     "typescript": "^4.2.4",
     "update-template": "^1.3.1",
@@ -55,8 +63,8 @@
   "engines": {
     "node": ">=14.17"
   },
-  "repository": "rweich/streamdeck-ts-template",
-  "bugs": "https://github.com/rweich/streamdeck-ts-template/issues",
+  "repository": "arinlipman/datadog-streamdeck-plugin",
+  "bugs": "https://github.com/arinlipman/datadog-streamdeck-plugin/issues",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
